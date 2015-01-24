@@ -27,3 +27,11 @@ Mismatch in example
 ```
 
 If no files are passed, markdown is read from `stdin`.
+
+## TODO
+
+- Exit non-zero if mismatches present
+- Hide `stderr` from check command
+- Add `CompileError` to `CheckResult`, ignore those
+- Output filename on mismatches
+- Output line number on mismatches (difficult)
