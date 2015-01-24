@@ -1,6 +1,7 @@
 module ExLint.Types where
 
 import Data.Monoid ((<>))
+import Data.Text (Text)
 
 data Language
     = Haskell
@@ -17,16 +18,16 @@ data Language
 --
 data Example = Example
     { examplePlugin :: Plugin
-    , examplePreamble :: String
-    , exampleExpression :: String
-    , exampleResult :: String
+    , examplePreamble :: Text
+    , exampleExpression :: Text
+    , exampleResult :: Text
     }
     deriving Show
 
 data Plugin = Plugin
     { pluginLanguage :: Language
-    , pluginSigil :: String
-    , pluginCheck :: Example -> IO () -- TODO
+    , pluginSigil :: Text
+    , pluginCheck :: Example -> IO Bool
     }
 
 instance Show Plugin where

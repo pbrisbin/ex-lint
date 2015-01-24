@@ -3,32 +3,35 @@ module ExLint.Example
     ) where
 
 import ExLint.Types (Example(..), Plugin(..))
+import ExLint.Parse (Block(..))
 import ExLint.Plugins (pluginForBlock)
 
-import Data.List (findIndex, isPrefixOf)
+import Data.List (findIndex)
 import Data.Maybe (mapMaybe)
-import Text.Pandoc.Definition (Block(..), Pandoc(..))
+import Data.Text (Text)
 
-getExamples :: Pandoc -> [Example]
-getExamples (Pandoc _ blks) = mapMaybe blockToExample blks
+import qualified Data.Text as T
 
-blockToExample :: Block -> Maybe Example
-blockToExample b@(CodeBlock _ code) =
-    pluginForBlock b >>= linesToExample (lines code)
+getExamples :: [Block a] -> [Example]
+getExamples = mapMaybe blockToExample
+
+blockToExample :: Block a -> Maybe Example
+blockToExample b@(BlockCode _ code) =
+    pluginForBlock b >>= linesToExample (T.lines code)
 
 blockToExample _ = Nothing
 
-linesToExample :: [String] -> Plugin -> Maybe Example
+linesToExample :: [Text] -> Plugin -> Maybe Example
 linesToExample lns p =
-    case findIndex (sigil `isPrefixOf`) $ lns of
+    case findIndex (sigil `T.isPrefixOf`) $ lns of
         Just idx | idx /= 0 -> Just $ Example
             { examplePlugin = p
-            , examplePreamble = unlines $ take (idx - 1) lns
+            , examplePreamble = T.unlines $ take (idx - 1) lns
             , exampleExpression = lns !! (idx - 1)
-            , exampleResult = drop (length sigil + 1) $ lns !! idx
+            , exampleResult = T.drop (T.length sigil + 1) $ lns !! idx
             }
         _ -> Nothing
 
     where
-        sigil :: String
+        sigil :: Text
         sigil = pluginSigil p
