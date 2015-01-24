@@ -1,14 +1,15 @@
 {-# LANGUAGE OverloadedStrings #-}
 module ExLint.Parse
-    ( Block(..)
-    , parseBlocks
+    ( parseBlocks
     ) where
+
+import ExLint.Types
 
 import Data.Conduit (($$), (=$))
 import Data.Functor.Identity (runIdentity)
 import Data.Text (Text)
 import Text.Markdown (def)
-import Text.Markdown.Block (Block(..), toBlocks)
+import Text.Markdown.Block (toBlocks)
 
 import qualified Data.Conduit.List as CL
 import qualified Data.Text.Lazy as T

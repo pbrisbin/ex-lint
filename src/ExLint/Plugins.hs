@@ -1,12 +1,10 @@
 {-# LANGUAGE OverloadedStrings #-}
 module ExLint.Plugins
     ( pluginForBlock
-    , module X
     ) where
 
-import ExLint.Parse (Block(..))
-import ExLint.Plugins.Haskell as X
-import ExLint.Types (Language(..), Plugin)
+import ExLint.Plugins.Haskell
+import ExLint.Types
 
 pluginForBlock :: Block a -> Maybe Plugin
 pluginForBlock = pluginForLanguage . blockLanguage

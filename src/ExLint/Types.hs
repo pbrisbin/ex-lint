@@ -1,21 +1,20 @@
-module ExLint.Types where
+module ExLint.Types
+    ( Block(..)
+    , Language(..)
+    , Example(..)
+    , CheckResult(..)
+    , Plugin(..)
+    ) where
 
 import Data.Monoid ((<>))
 import Data.Text (Text)
+import Text.Markdown.Block (Block(..))
 
 data Language
     = Haskell
     | Unknown
     deriving Show
 
--- | Example pulled from a code block
---
--- Current limitations:
---
--- 1. One example per block
--- 3. One line result
--- 2. One line example directly before result
---
 data Example = Example
     { examplePlugin :: Plugin
     , examplePreamble :: Text

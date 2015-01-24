@@ -2,9 +2,8 @@ module ExLint.Example
     ( getExamples
     ) where
 
-import ExLint.Types (Example(..), Plugin(..))
-import ExLint.Parse (Block(..))
 import ExLint.Plugins (pluginForBlock)
+import ExLint.Types
 
 import Data.List (findIndex)
 import Data.Maybe (mapMaybe)
