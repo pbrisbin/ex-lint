@@ -8,9 +8,11 @@ Check the code examples in your markdown.
 % cabal install ex-lint
 ```
 
+*Note: not yet on Hackage, install from source for now*
+
 ## Usage
 
-Add expected results in your markdown, like so:
+Format examples in your markdown like so:
 
 ````md
 This is some markdown. Here is a good example:
@@ -22,7 +24,7 @@ add 2 2
 -- => 4
 ```
 
-And here is a bad example:
+And here is an incorrect example:
 
 ```hs
 add x y = x + y
@@ -32,23 +34,14 @@ add 2 2
 ```
 ````
 
-Run the markdown file through your linter and see errors
+Run the markdown file with the linter to see any errors:
 
 ```
-% ex-lint foo.md
-foo.md - error in example
-  Example expression: add 2 2
-  Expected result:    5
-  Actual result:      4
-````
+% ex-lint test/example.md
+Mismatch in example
+  Expression: 2 + 2
+  Expected:   5
+  Actual:     4
+```
 
-*Actual error messages are subject to change*
-
-## Limitations
-
-This tool is in its early stages and quite simple at the moment:
-
-- One example per code block
-- The example expression must be a single line
-- The expected result must be a single line and immediately follow the example
-  expression
+If no files are passed, markdown is read from `stdin`.
