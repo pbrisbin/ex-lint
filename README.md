@@ -12,27 +12,9 @@ Check the code examples in your markdown.
 
 ## Usage
 
-Format examples in your markdown like so:
+Format examples in your markdown like [this][ex].
 
-````md
-This is some markdown. Here is a good example:
-
-```hs
-add x y = x + y
-
-add 2 2
--- => 4
-```
-
-And here is an incorrect example:
-
-```hs
-add x y = x + y
-
-add 2 2
--- => 5
-```
-````
+[ex]: https://github.com/pbrisbin/ex-lint/blob/master/test/example.md
 
 Run the markdown file with the linter to see any errors:
 
