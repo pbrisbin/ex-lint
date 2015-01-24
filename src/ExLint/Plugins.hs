@@ -7,12 +7,6 @@ import ExLint.Plugins.Haskell
 import ExLint.Types
 
 pluginForBlock :: Block a -> Maybe Plugin
-pluginForBlock = pluginForLanguage . blockLanguage
-
-pluginForLanguage :: Language -> Maybe Plugin
-pluginForLanguage Haskell = Just $ haskellPlugin
-pluginForLanguage _ = Nothing
-
-blockLanguage :: Block a -> Language
-blockLanguage (BlockCode (Just "hs") _) = Haskell
-blockLanguage _ = Unknown
+pluginForBlock (BlockCode (Just "hs") _) = Just haskellPlugin
+pluginForBlock (BlockCode (Just "haskell") _) = Just haskellPlugin
+pluginForBlock _ = Nothing
