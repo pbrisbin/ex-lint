@@ -24,10 +24,15 @@ data Example = Example
     }
     deriving Show
 
+data CheckResult
+    = Match
+    | MisMatch Text Text Text
+    deriving Show
+
 data Plugin = Plugin
     { pluginLanguage :: Language
     , pluginSigil :: Text
-    , pluginCheck :: Example -> IO Bool
+    , pluginCheck :: Example -> IO CheckResult
     }
 
 instance Show Plugin where
